@@ -1,4 +1,4 @@
-# Smart-Security-Camera
+# Smart Security Camera Python3 Version
 Original Project: https://github.com/HackerShackOfficial/Smart-Security-Camera
 
 I made some updates to the original code in order to make it compatible with Python 3 instead of Python 2. You can follow the same instructions as the original project, but make sure to install the Python 3 versions of the libraries required.
