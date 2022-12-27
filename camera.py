@@ -15,7 +15,7 @@ class VideoCamera(object):
 
     def flip_if_needed(self, frame):
         if self.flip:
-            return np.flip(frame, 0)
+            return np.flip(frame, (0, 1))
         return frame
 
     def get_frame(self):
@@ -25,12 +25,13 @@ class VideoCamera(object):
 
     def get_object(self, classifier):
         found_objects = False
-        frame = self.flip_if_needed(self.vs.read()).copy() 
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        frame = self.flip_if_needed(self.vs.read()).copy()
+        resized = cv2.resize(frame, (320, 240))
+        gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
 
         objects = classifier.detectMultiScale(
             gray,
-            scaleFactor=1.1,
+            scaleFactor=1.3,
             minNeighbors=5,
             minSize=(30, 30),
             flags=cv2.CASCADE_SCALE_IMAGE
@@ -41,9 +42,9 @@ class VideoCamera(object):
 
         # Draw a rectangle around the objects
         for (x, y, w, h) in objects:
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            cv2.rectangle(resized, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-        ret, jpeg = cv2.imencode('.jpg', frame)
+        ret, jpeg = cv2.imencode('.jpg', resized)
         return (jpeg.tobytes(), found_objects)
 
 

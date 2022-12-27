@@ -3,6 +3,8 @@ Original Project: https://github.com/HackerShackOfficial/Smart-Security-Camera
 
 I made some updates to the original code in order to make it compatible with Python 3 instead of Python 2. You can follow the same instructions as the original project, but make sure to install the Python 3 versions of the libraries required.
 
+I also modified the email sending function so it can be called multiple times to send emails to different people, and tuned the detection parameters to fit the Raspberry Pi Camera rev 1.3 using the frontalface model.
+
 # Original Project: 
 
 IoT Raspberry Pi security camera running open-cv for object detection. The camera will send an email with an image of any objects it detects. It also runs a server that provides a live video stream over the internet.
